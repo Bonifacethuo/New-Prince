@@ -54,19 +54,19 @@ const HeroBanner = () => {
 
       {/* Content Container */}
       <div className="relative container mx-auto px-4 py-32">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 animate-fade-in-up">
-          <div className="lg:w-[55%] space-y-10 z-20">
+        <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto animate-fade-in-up">
+          <div className="space-y-10 z-20">
             {/* Elevated Typography */}
-            <h1 className="font-serif text-3xl md:text-5xl lg:text-5xl font-black tracking-tighter text-foreground leading-[1] uppercase drop-shadow-md">
+            <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground leading-[1] uppercase drop-shadow-lg">
               {settings.title}
             </h1>
 
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-lg font-light leading-relaxed border-l-4 border-accent pl-8">
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto font-light leading-relaxed border-t-2 border-accent pt-8">
               {settings.subtitle}
             </p>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-8 pt-6">
+            <div className="flex flex-col sm:flex-row gap-8 pt-6 justify-center">
               <Button
                 variant="default"
                 size="xl"
@@ -76,18 +76,6 @@ const HeroBanner = () => {
                 {settings.buttonText}
                 <ArrowRight className="h-6 w-6 ml-6 transition-transform group-hover:translate-x-3" />
               </Button>
-            </div>
-          </div>
-
-          {/* Featured Image - Enhanced Visibility */}
-          <div className="relative group w-full lg:w-[45%] flex justify-center lg:justify-end z-10">
-            <div className="absolute inset-0 bg-gradient-to-tr from-accent/20 to-transparent blur-[140px] rounded-full scale-110 group-hover:scale-125 transition-transform duration-1000 animate-pulse" />
-            <div className="relative bg-white/40 backdrop-blur-3xl rounded-[3rem] p-4 lg:p-8 border border-black/5 shadow-2xl overflow-hidden group-hover:border-accent/50 transition-colors duration-700">
-              <img
-                src={mainFeaturedImage}
-                alt={settings.featuredAlt || "Legend Mode"}
-                className="relative z-10 max-w-full h-auto drop-shadow-[0_50px_100px_rgba(0,0,0,0.5)] transition-all duration-1000 group-hover:scale-110 group-hover:-rotate-3"
-              />
             </div>
           </div>
         </div>
