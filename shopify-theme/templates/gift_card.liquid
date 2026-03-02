@@ -1,0 +1,194 @@
+{% comment %}
+  Prince Shop - Gift Card Template
+{% endcomment %}
+
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ 'gift_cards.issued.title' | t: value: gift_card.initial_value, shop: shop.name }}</title>
+  {{ content_for_header }}
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #FAF9F7 0%, #f3e8ff 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      margin: 0;
+    }
+    .gift-card-container {
+      max-width: 500px;
+      width: 100%;
+      background: white;
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 20px 60px -10px rgba(55, 48, 163, 0.2);
+      text-align: center;
+    }
+    .gift-card-logo {
+      margin-bottom: 24px;
+    }
+    .gift-card-logo svg {
+      width: 48px;
+      height: 48px;
+      color: #D4A843;
+    }
+    .gift-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      color: #1E1B4B;
+      margin-bottom: 16px;
+    }
+    .gift-card-value {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #3730A3;
+      margin-bottom: 24px;
+    }
+    .gift-card-code {
+      background: #f9fafb;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    .gift-card-code-label {
+      font-size: 0.875rem;
+      color: #6b7280;
+      margin-bottom: 8px;
+    }
+    .gift-card-code-value {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: #1E1B4B;
+    }
+    .gift-card-qr {
+      margin-bottom: 24px;
+    }
+    .gift-card-qr img {
+      max-width: 150px;
+    }
+    .gift-card-instructions {
+      font-size: 0.875rem;
+      color: #6b7280;
+      margin-bottom: 24px;
+    }
+    .gift-card-balance {
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+    .gift-card-balance strong {
+      color: #1E1B4B;
+    }
+    .gift-card-expired {
+      background: #fef2f2;
+      color: #dc2626;
+      padding: 12px 20px;
+      border-radius: 8px;
+      margin-top: 16px;
+    }
+    .gift-card-shop-link {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, #D4A843, #c4982f);
+      color: #1a1a1a;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+    .gift-card-shop-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(212, 168, 67, 0.4);
+    }
+    .gift-card-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 24px;
+    }
+    .gift-card-action {
+      padding: 12px 20px;
+      border: 1px solid #e5e7eb;
+      background: white;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .gift-card-action:hover {
+      border-color: #3730A3;
+      color: #3730A3;
+    }
+  </style>
+</head>
+<body>
+  <div class="gift-card-container">
+    <div class="gift-card-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+      </svg>
+    </div>
+
+    <h1 class="gift-card-title">
+      {{ 'gift_cards.issued.subtext' | t }}
+    </h1>
+
+    <div class="gift-card-value">
+      {{ gift_card.initial_value | money }}
+    </div>
+
+    <div class="gift-card-code">
+      <p class="gift-card-code-label">{{ 'gift_cards.issued.gift_card_code' | t }}</p>
+      <p class="gift-card-code-value" id="GiftCardCode">{{ gift_card.code | format_code }}</p>
+    </div>
+
+    <div class="gift-card-qr">
+      <img src="{{ gift_card.qr_code_identifier | qr_code }}" alt="{{ 'gift_cards.issued.qr_image_alt' | t }}">
+    </div>
+
+    <p class="gift-card-instructions">
+      Use this code at checkout to redeem your gift card.
+    </p>
+
+    {% if gift_card.balance != gift_card.initial_value %}
+      <p class="gift-card-balance">
+        {{ 'gift_cards.issued.remaining_html' | t: balance: gift_card.balance | money }}
+      </p>
+    {% endif %}
+
+    {% if gift_card.expired %}
+      <p class="gift-card-expired">
+        {{ 'gift_cards.issued.expired' | t }}
+      </p>
+    {% endif %}
+
+    <a href="{{ shop.url }}" class="gift-card-shop-link">
+      {{ 'gift_cards.issued.shop_link' | t }}
+    </a>
+
+    <div class="gift-card-actions">
+      <button class="gift-card-action" onclick="copyCode()">
+        {{ 'gift_cards.issued.copy_code' | t }}
+      </button>
+      <button class="gift-card-action" onclick="window.print()">
+        {{ 'gift_cards.issued.print_gift_card' | t }}
+      </button>
+    </div>
+  </div>
+
+  <script>
+    function copyCode() {
+      var code = document.getElementById('GiftCardCode').innerText;
+      navigator.clipboard.writeText(code).then(function() {
+        alert('{{ 'gift_cards.issued.copy_code_success' | t }}');
+      });
+    }
+  </script>
+</body>
+</html>

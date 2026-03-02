@@ -1,0 +1,206 @@
+<article class="section-article">
+  <div class="page-width">
+    <header class="article-header">
+      <a href="{{ blog.url }}" class="article-back-link">
+        ← Back to {{ blog.title }}
+      </a>
+      <h1 class="article-title">{{ article.title }}</h1>
+      <div class="article-meta">
+        <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+          {{ article.published_at | date: format: 'date' }}
+        </time>
+        {% if article.author %}
+          <span class="article-author">by {{ article.author }}</span>
+        {% endif %}
+      </div>
+    </header>
+
+    {% if article.image %}
+      <div class="article-featured-image">
+        <img 
+          src="{{ article.image | image_url: width: 1200 }}" 
+          alt="{{ article.image.alt | escape }}"
+        >
+      </div>
+    {% endif %}
+
+    <div class="article-content rte">
+      {{ article.content }}
+    </div>
+
+    {% if article.tags.size > 0 %}
+      <div class="article-tags">
+        <span>Tags:</span>
+        {% for tag in article.tags %}
+          <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if blog.comments_enabled? %}
+      <div class="article-comments">
+        <h2>Comments</h2>
+        {% if article.comments_count > 0 %}
+          {% for comment in article.comments %}
+            <div class="comment">
+              <p class="comment-author">{{ comment.author }}</p>
+              <p class="comment-content">{{ comment.content }}</p>
+              <time class="comment-date">{{ comment.created_at | date: format: 'date' }}</time>
+            </div>
+          {% endfor %}
+        {% endif %}
+
+        {% form 'new_comment', article %}
+          <h3>Leave a comment</h3>
+          {{ form.errors | default_errors }}
+          <div class="comment-form-field">
+            <label for="CommentAuthor">Name</label>
+            <input type="text" name="comment[author]" id="CommentAuthor" required>
+          </div>
+          <div class="comment-form-field">
+            <label for="CommentEmail">Email</label>
+            <input type="email" name="comment[email]" id="CommentEmail" required>
+          </div>
+          <div class="comment-form-field">
+            <label for="CommentBody">Comment</label>
+            <textarea name="comment[body]" id="CommentBody" required></textarea>
+          </div>
+          <button type="submit" class="comment-submit">Post comment</button>
+        {% endform %}
+      </div>
+    {% endif %}
+  </div>
+</article>
+
+<style>
+  .section-article {
+    padding: 40px 0;
+  }
+  .article-header {
+    max-width: 800px;
+    margin: 0 auto 40px;
+    text-align: center;
+  }
+  .article-back-link {
+    display: inline-block;
+    color: #3730A3;
+    text-decoration: none;
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+  .article-back-link:hover {
+    text-decoration: underline;
+  }
+  .article-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: #1E1B4B;
+    margin-bottom: 16px;
+  }
+  .article-meta {
+    color: #6b7280;
+  }
+  .article-author {
+    margin-left: 8px;
+  }
+  .article-featured-image {
+    max-width: 1000px;
+    margin: 0 auto 40px;
+  }
+  .article-featured-image img {
+    width: 100%;
+    border-radius: 16px;
+  }
+  .article-content {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+    color: #374151;
+  }
+  .article-content h2, 
+  .article-content h3 {
+    font-family: 'Playfair Display', serif;
+    color: #1E1B4B;
+    margin-top: 32px;
+    margin-bottom: 16px;
+  }
+  .article-content p {
+    margin-bottom: 16px;
+  }
+  .article-tags {
+    max-width: 800px;
+    margin: 40px auto 0;
+    padding-top: 24px;
+    border-top: 1px solid #e5e7eb;
+  }
+  .article-tags a {
+    color: #3730A3;
+  }
+  .article-comments {
+    max-width: 800px;
+    margin: 40px auto 0;
+    padding-top: 40px;
+    border-top: 1px solid #e5e7eb;
+  }
+  .article-comments h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: #1E1B4B;
+    margin-bottom: 24px;
+  }
+  .comment {
+    padding: 20px;
+    background: #f9fafb;
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+  .comment-author {
+    font-weight: 600;
+    color: #1E1B4B;
+  }
+  .comment-date {
+    font-size: 0.875rem;
+    color: #9ca3af;
+  }
+  .comment-form-field {
+    margin-bottom: 16px;
+  }
+  .comment-form-field label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .comment-form-field input,
+  .comment-form-field textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+  }
+  .comment-form-field textarea {
+    min-height: 120px;
+  }
+  .comment-submit {
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #3730A3, #5B21B6);
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .comment-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(55, 48, 163, 0.3);
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Article",
+  "tag": "article",
+  "class": "section-article",
+  "settings": []
+}
+{% endschema %}

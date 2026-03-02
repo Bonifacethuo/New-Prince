@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ page_title }} | {{ shop.name }}</title>
+    <meta name="description" content="{{ page_description | default: shop.description }}" />
+    <meta name="author" content="{{ shop.name }}" />
+
+    <meta property="og:title" content="{{ page_title }}" />
+    <meta property="og:description" content="{{ page_description | default: shop.description }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ canonical_url }}" />
+    <meta property="og:site_name" content="{{ shop.name }}" />
+    {% if page_image %}
+    <meta property="og:image" content="http:{{ page_image | image_url }}" />
+    {% endif %}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ page_title }}" />
+    <meta name="twitter:description" content="{{ page_description | default: shop.description }}" />
+    {% if page_image %}
+    <meta name="twitter:image" content="http:{{ page_image | image_url }}" />
+    {% endif %}
+
+    <link rel="canonical" href="{{ canonical_url }}" />
+    <link rel="shortcut icon" href="{{ 'favicon.ico' | asset_url }}" type="image/x-icon" />
+
+    {% if settings.favicon != blank %}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {% endif %}
+
+    {{ content_for_header }}
+
+    <link rel="stylesheet" href="{{ 'index-DuSvEwBX.css' | asset_url }}" />
+
+    {% render 'custom-styles' %}
+  </head>
+
+  <body>
+    <a class="skip-to-content-link visually-hidden" href="#MainContent">
+      {{ "accessibility.skip_to_text" | t }}
+    </a>
+
+    <div id="root"></div>
+
+    <main id="MainContent" class="content-for-layout" role="main">
+      {{ content_for_layout }}
+    </main>
+
+    <script type="module" src="{{ 'index-BZ35zJbx.js' | asset_url }}"></script>
+
+    {% if request.design_mode %}
+      <script src="{{ 'theme-editor.js' | asset_url }}" defer></script>
+    {% endif %}
+  </body>
+</html>

@@ -1,0 +1,236 @@
+<section class="section-cart">
+  <div class="page-width">
+    <header class="cart-header">
+      <h1 class="cart-title">{{ 'templates.cart.cart' | t }}</h1>
+    </header>
+
+    {% if cart.item_count > 0 %}
+      <form action="{{ routes.cart_url }}" method="post" id="cart">
+        <div class="cart-items">
+          {% for item in cart.items %}
+            <div class="cart-item">
+              <div class="cart-item-image">
+                {% if item.image %}
+                  <a href="{{ item.url }}">
+                    <img 
+                      src="{{ item.image | image_url: width: 150 }}" 
+                      alt="{{ item.image.alt | escape }}"
+                      width="150"
+                      height="{{ 150 | divided_by: item.image.aspect_ratio | round }}"
+                    >
+                  </a>
+                {% endif %}
+              </div>
+              <div class="cart-item-details">
+                <a href="{{ item.url }}" class="cart-item-title">{{ item.product.title }}</a>
+                {% unless item.product.has_only_default_variant %}
+                  <p class="cart-item-variant">{{ item.variant.title }}</p>
+                {% endunless %}
+                <div class="cart-item-price">
+                  {{ item.final_line_price | money }}
+                </div>
+              </div>
+              <div class="cart-item-quantity">
+                <label for="updates_{{ item.key }}" class="visually-hidden">
+                  {{ 'products.product.quantity.label' | t }}
+                </label>
+                <input 
+                  type="number" 
+                  name="updates[]" 
+                  id="updates_{{ item.key }}"
+                  value="{{ item.quantity }}" 
+                  min="0"
+                  class="cart-quantity-input"
+                  data-key="{{ item.key }}"
+                >
+              </div>
+              <div class="cart-item-remove">
+                <a href="{{ item.url_to_remove }}" class="cart-remove-link">
+                  {{ 'cart.general.remove' | t | default: 'Remove' }}
+                </a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <div class="cart-footer">
+          <div class="cart-totals">
+            <div class="cart-subtotal">
+              <span>{{ 'cart.general.subtotal' | t | default: 'Subtotal' }}</span>
+              <span class="cart-subtotal-price">{{ cart.total_price | money }}</span>
+            </div>
+            <p class="cart-taxes-note">
+              {{ 'cart.general.taxes_and_shipping_at_checkout' | t | default: 'Taxes and shipping calculated at checkout' }}
+            </p>
+          </div>
+
+          <div class="cart-actions">
+            <button type="submit" name="update" class="cart-update-button">
+              {{ 'cart.general.update' | t | default: 'Update' }}
+            </button>
+            <button type="submit" name="checkout" class="cart-checkout-button">
+              {{ 'cart.general.checkout' | t | default: 'Checkout' }}
+            </button>
+          </div>
+        </div>
+      </form>
+    {% else %}
+      <div class="cart-empty">
+        <p>{{ 'cart.general.empty' | t | default: 'Your cart is empty' }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="button">
+          {{ 'general.continue_shopping' | t | default: 'Continue shopping' }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  .section-cart {
+    padding: 40px 0;
+  }
+  .cart-header {
+    margin-bottom: 40px;
+  }
+  .cart-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: #1E1B4B;
+  }
+  .cart-items {
+    border-top: 1px solid #e5e7eb;
+  }
+  .cart-item {
+    display: grid;
+    grid-template-columns: 100px 1fr auto auto;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid #e5e7eb;
+    align-items: center;
+  }
+  @media (max-width: 640px) {
+    .cart-item {
+      grid-template-columns: 80px 1fr;
+      gap: 16px;
+    }
+    .cart-item-quantity,
+    .cart-item-remove {
+      grid-column: 2;
+    }
+  }
+  .cart-item-image img {
+    width: 100%;
+    border-radius: 8px;
+  }
+  .cart-item-title {
+    font-weight: 500;
+    color: #1E1B4B;
+    text-decoration: none;
+  }
+  .cart-item-title:hover {
+    color: #3730A3;
+  }
+  .cart-item-variant {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 4px;
+  }
+  .cart-item-price {
+    font-weight: 600;
+    margin-top: 8px;
+  }
+  .cart-quantity-input {
+    width: 80px;
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .cart-remove-link {
+    color: #6b7280;
+    font-size: 0.875rem;
+    text-decoration: underline;
+  }
+  .cart-footer {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .cart-subtotal {
+    font-size: 1.25rem;
+    display: flex;
+    gap: 16px;
+  }
+  .cart-subtotal-price {
+    font-weight: bold;
+  }
+  .cart-taxes-note {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 8px;
+  }
+  .cart-actions {
+    display: flex;
+    gap: 12px;
+  }
+  .cart-update-button {
+    padding: 14px 24px;
+    border: 1px solid #e5e7eb;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .cart-update-button:hover {
+    border-color: #3730A3;
+  }
+  .cart-checkout-button {
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #D4A843, #c4982f);
+    color: #1a1a1a;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .cart-checkout-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(212, 168, 67, 0.4);
+  }
+  .cart-empty {
+    text-align: center;
+    padding: 60px 20px;
+  }
+  .cart-empty p {
+    font-size: 1.25rem;
+    color: #6b7280;
+    margin-bottom: 24px;
+  }
+  .cart-empty .button {
+    display: inline-block;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #D4A843, #c4982f);
+    color: #1a1a1a;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  .cart-empty .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(212, 168, 67, 0.4);
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Cart",
+  "tag": "section",
+  "class": "section-cart",
+  "settings": []
+}
+{% endschema %}

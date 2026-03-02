@@ -1,0 +1,80 @@
+{% comment %}
+  Prince Shop - Main Content Section
+  The React app renders the complete storefront into the #root element
+{% endcomment %}
+
+<div class="prince-shop-container" 
+     id="shopify-section-settings" 
+     data-settings='{{ section.settings | json }}'
+     data-hero-image="{{ section.settings.hero_image | image_url: width: 2000 }}">
+  {%- comment -%}
+    The React application will render the complete storefront.
+    We pass settings via data attributes for the React app to consume.
+  {%- endcomment -%}
+</div>
+
+<script>
+  window.ShopifySettings = {
+    hero: {
+      image: "{{ section.settings.hero_image | image_url: width: 2000 }}",
+      featuredImage: "{{ section.settings.featured_image | image_url: width: 1500 }}",
+      featuredAlt: "{{ section.settings.featured_image.alt | escape }}",
+      title: "{{ section.settings.hero_title | escape }}",
+      subtitle: "{{ section.settings.hero_subtitle | escape }}",
+      buttonText: "{{ section.settings.button_text | escape }}",
+      buttonLink: "{{ section.settings.button_link }}"
+    }
+  };
+</script>
+
+{% schema %}
+{
+  "name": "Main Content",
+  "tag": "section",
+  "class": "section-main-content",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Section"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero Title",
+      "default": "Discover Your Prince Shop Style"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subtitle",
+      "label": "Hero Subtitle",
+      "default": "Modern aesthetics meet contemporary design. Elevate your everyday wardrobe."
+    },
+    {
+      "type": "image_picker",
+      "id": "featured_image",
+      "label": "Featured Shirt Image"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Collection"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main Content"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,30 @@
+{
+  "current": {
+    "color_primary": "#3730A3",
+    "color_secondary": "#F8BBD9",
+    "color_accent": "#D4A843",
+    "color_background": "#FAF9F7",
+    "color_foreground": "#1E1B4B",
+    "logo_width": 150,
+    "cart_type": "drawer",
+    "social_instagram_link": "",
+    "social_facebook_link": "",
+    "social_twitter_link": "",
+    "social_youtube_link": "",
+    "sections": {
+      "main": {
+        "type": "main-content",
+        "settings": {}
+      }
+    }
+  },
+  "presets": {
+    "Default": {
+      "color_primary": "#3730A3",
+      "color_secondary": "#F8BBD9",
+      "color_accent": "#D4A843",
+      "color_background": "#FAF9F7",
+      "color_foreground": "#1E1B4B"
+    }
+  }
+}

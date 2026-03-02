@@ -1,0 +1,169 @@
+<section class="section-search">
+  <div class="page-width">
+    <header class="search-header">
+      <h1 class="search-title">{{ 'templates.search.title' | t }}</h1>
+    </header>
+
+    <form action="{{ routes.search_url }}" method="get" class="search-form">
+      <div class="search-input-wrapper">
+        <input 
+          type="search" 
+          name="q" 
+          value="{{ search.terms | escape }}"
+          placeholder="{{ 'templates.search.search' | t }}"
+          class="search-input"
+        >
+        <button type="submit" class="search-button">
+          {{ 'templates.search.search' | t }}
+        </button>
+      </div>
+    </form>
+
+    {% if search.performed %}
+      {% if search.results_count > 0 %}
+        <p class="search-results-count">
+          {{ 'templates.search.results_with_count_and_term' | t: count: search.results_count, terms: search.terms }}
+        </p>
+        <div class="search-results-grid">
+          {% for item in search.results %}
+            <div class="search-result-card">
+              <a href="{{ item.url }}" class="search-result-link">
+                {% if item.featured_image %}
+                  <div class="search-result-image-wrapper">
+                    <img 
+                      src="{{ item.featured_image | image_url: width: 300 }}" 
+                      alt="{{ item.featured_image.alt | escape }}"
+                      class="search-result-image"
+                      loading="lazy"
+                    >
+                  </div>
+                {% endif %}
+                <div class="search-result-info">
+                  <h3 class="search-result-title">{{ item.title }}</h3>
+                  {% if item.price %}
+                    <span class="search-result-price">{{ item.price | money }}</span>
+                  {% endif %}
+                </div>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+
+        {% if paginate.pages > 1 %}
+          <nav class="search-pagination">
+            {{ paginate | default_pagination }}
+          </nav>
+        {% endif %}
+      {% else %}
+        <p class="search-no-results">
+          {{ 'templates.search.no_results' | t: terms: search.terms }}
+        </p>
+      {% endif %}
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  .section-search {
+    padding: 40px 0;
+  }
+  .search-header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .search-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: #1E1B4B;
+  }
+  .search-form {
+    max-width: 600px;
+    margin: 0 auto 40px;
+  }
+  .search-input-wrapper {
+    display: flex;
+    gap: 12px;
+  }
+  .search-input {
+    flex: 1;
+    padding: 14px 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 1rem;
+  }
+  .search-button {
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #3730A3, #5B21B6);
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .search-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(55, 48, 163, 0.3);
+  }
+  .search-results-count {
+    text-align: center;
+    margin-bottom: 32px;
+    color: #6b7280;
+  }
+  .search-results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 24px;
+  }
+  .search-result-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px -4px rgba(128, 90, 213, 0.15);
+    transition: all 0.3s ease;
+  }
+  .search-result-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px -10px rgba(55, 48, 163, 0.25);
+  }
+  .search-result-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  .search-result-image-wrapper {
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: #f3f4f6;
+  }
+  .search-result-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .search-result-info {
+    padding: 16px;
+  }
+  .search-result-title {
+    font-weight: 500;
+    color: #1E1B4B;
+    margin-bottom: 8px;
+  }
+  .search-result-price {
+    font-weight: 600;
+    color: #3730A3;
+  }
+  .search-no-results {
+    text-align: center;
+    color: #6b7280;
+    font-size: 1.125rem;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Search",
+  "tag": "section",
+  "class": "section-search",
+  "settings": []
+}
+{% endschema %}

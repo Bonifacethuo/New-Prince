@@ -1,0 +1,292 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Prince Shop - Modern & Contemporary Streetwear Store Design System */
+
+@layer base {
+  :root {
+    /* Core Backgrounds - Neutral & Clean */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+
+    /* Card & Popover */
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    /* Futuristic Black Primary */
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+
+    /* Minimal Grey Secondary */
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    /* Muted - Soft Slate */
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    /* Cyan/Futuristic Accent */
+    --accent: 199 89% 48%;
+    /* Cyber Cyan */
+    --accent-foreground: 0 0% 100%;
+
+    /* Destructive */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Borders & Input */
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+
+    --radius: 0.5rem;
+
+    /* Typography */
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-serif: 'Outfit', sans-serif;
+    /* Using Outfit as a modern semi-serif/display font */
+
+    /* Shadows - Minimal & Sharp */
+    --shadow-soft: 0 2px 10px -2px rgba(0, 0, 0, 0.05);
+    --shadow-card: 0 4px 20px -5px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 199 89% 48%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  }
+}
+
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    cursor: default;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    @apply bg-accent/20 text-foreground;
+  }
+
+  /* Custom Minimalist Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-accent/50;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif tracking-tighter text-foreground;
+  }
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-serif;
+}
+
+@layer components {
+  .text-gradient-gold {
+    @apply bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-400 bg-clip-text text-transparent;
+  }
+
+  .bg-gradient-royal {
+    background: linear-gradient(135deg, hsl(var(--royal-blue)), hsl(270 50% 45%));
+  }
+
+  .bg-gradient-pink {
+    background: linear-gradient(135deg, hsl(var(--soft-pink)), hsl(var(--lavender)));
+  }
+
+  .bg-gradient-gold {
+    background: linear-gradient(135deg, hsl(43 90% 55%), hsl(35 90% 50%));
+  }
+
+  .sparkle {
+    position: relative;
+  }
+
+  .sparkle::before {
+    content: '✦';
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    font-size: 12px;
+    color: hsl(var(--gold));
+    animation: sparkle-float 2s ease-in-out infinite;
+  }
+
+  @keyframes sparkle-float {
+
+    0%,
+    100% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    50% {
+      transform: translateY(-5px) scale(1.2);
+      opacity: 0.7;
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  .shimmer {
+    background: linear-gradient(90deg,
+        transparent 0%,
+        hsl(43 90% 55% / 0.3) 50%,
+        transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite;
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out forwards;
+  }
+
+  @keyframes scale-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.3s ease-out forwards;
+  }
+
+  @keyframes glow {
+
+    0%,
+    100% {
+      box-shadow: 0 0 20px hsl(43 90% 55% / 0.3);
+    }
+
+    50% {
+      box-shadow: 0 0 40px hsl(43 90% 55% / 0.5);
+    }
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-xl;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300;
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 30px hsl(var(--gold) / 0.4);
+  }
+}
