@@ -1,8 +1,25 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "main-content",
-      "settings": {}
+      "settings": {
+        "hero_image": "shopify://shop_images/15176623077628678632_2048.jpg",
+        "video_url": "https://cdn.shopify.com/videos/c/o/v/6bdf94db17704b64a6efef4c514d383c.mp4",
+        "hero_title": "Discover Your Prince Shop Style",
+        "hero_subtitle": "Modern aesthetics meet contemporary design. Elevate your everyday wardrobe.",
+        "featured_image": "shopify://shop_images/3361333778053197158_2048.jpg",
+        "button_text": "Shop Collection",
+        "button_link": "shopify://collections/all"
+      }
     }
   },
   "order": [
