@@ -23,53 +23,56 @@ const HeroBanner = () => {
 
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-background">
-      {/* Dynamic Background Image */}
+      {/* Dynamic Background Image & Color Layer */}
       <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-accent/10" />
         <img
           src={heroImage}
           alt={settings.title}
-          className="w-full h-full object-cover object-center scale-105"
+          className="w-full h-full object-cover object-center opacity-30 mix-blend-overlay"
         />
-        {/* Futurist Minimal Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-        <div className="absolute inset-0 bg-background/10 backdrop-grayscale-[0.2]" />
+        {/* Colorful Glows */}
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary/20 blur-[150px] rounded-full animate-pulse" />
+        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-accent/20 blur-[150px] rounded-full animate-pulse" />
       </div>
 
       {/* Content Container */}
-      <div className="relative container mx-auto px-4 pt-20">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24 animate-fade-in-up">
-          <div className="lg:w-1/2 space-y-8">
+      <div className="relative container mx-auto px-4 py-32">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 animate-fade-in-up">
+          <div className="lg:w-[55%] space-y-10 z-20">
             {/* Elevated Typography */}
-            <h1 className="font-serif text-5xl md:text-7xl lg:text-9xl font-extrabold tracking-tighter text-foreground leading-[0.9] uppercase">
+            <h1 className="font-serif text-6xl md:text-8xl lg:text-[7rem] font-black tracking-tighter text-foreground leading-[0.8] uppercase drop-shadow-sm">
               {settings.title}
             </h1>
 
-            <p className="text-lg md:text-xl text-muted-foreground max-w-lg font-light leading-relaxed">
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-lg font-light leading-relaxed border-l-4 border-accent pl-8">
               {settings.subtitle}
             </p>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-6 pt-4">
+            <div className="flex flex-col sm:flex-row gap-8 pt-6">
               <Button
                 variant="default"
                 size="xl"
-                className="rounded-none px-12 group h-16 text-lg bg-foreground text-background hover:bg-accent hover:text-white transition-all duration-500"
+                className="rounded-full px-16 group h-20 text-xl bg-primary text-white hover:bg-accent hover:scale-105 transition-all duration-500 shadow-2xl shadow-primary/20"
                 onClick={() => window.location.href = settings.buttonLink || '/collections/all'}
               >
                 {settings.buttonText}
-                <ArrowRight className="h-5 w-5 ml-4 transition-transform group-hover:translate-x-2" />
+                <ArrowRight className="h-6 w-6 ml-6 transition-transform group-hover:translate-x-3" />
               </Button>
             </div>
           </div>
 
-          {/* Featured Image (T-shirt provided by user or Shopify setting) - Enlarged */}
-          <div className="relative group w-full lg:w-1/2 max-w-3xl">
-            <div className="absolute inset-0 bg-accent/20 blur-[120px] rounded-full scale-90 group-hover:scale-110 transition-transform duration-1000" />
-            <img
-              src={mainFeaturedImage}
-              alt={settings.featuredAlt || "Legend Mode"}
-              className="relative z-10 w-full h-auto drop-shadow-[0_40px_80px_rgba(0,0,0,0.5)] transition-all duration-1000 group-hover:scale-110 group-hover:-translate-y-8"
-            />
+          {/* Featured Image - Enhanced Visibility */}
+          <div className="relative group w-full lg:w-[45%] flex justify-center lg:justify-end z-10">
+            <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-accent/30 blur-[140px] rounded-full scale-110 group-hover:scale-125 transition-transform duration-1000 animate-pulse" />
+            <div className="relative bg-white/5 backdrop-blur-3xl rounded-[3rem] p-4 lg:p-8 border border-white/20 shadow-2xl overflow-hidden group-hover:border-accent/50 transition-colors duration-700">
+              <img
+                src={mainFeaturedImage}
+                alt={settings.featuredAlt || "Legend Mode"}
+                className="relative z-10 max-w-full h-auto drop-shadow-[0_50px_100px_rgba(0,0,0,0.5)] transition-all duration-1000 group-hover:scale-110 group-hover:-rotate-3"
+              />
+            </div>
           </div>
         </div>
       </div>

@@ -53,10 +53,10 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-2xl border-b border-border">
-      {/* Dynamic Top Banner - Minimalist */}
-      <div className="bg-primary text-background py-3 px-4">
-        <p className="text-center text-[10px] font-black uppercase tracking-[0.4em]">
-          Prince Shop Core Series / Now Live / USE: <span className="text-accent">PRINCE20</span>
+      {/* Dynamic Top Banner - Colorful Gradient */}
+      <div className="bg-gradient-to-r from-primary via-accent to-primary text-white py-3 px-4 shadow-sm">
+        <p className="text-center text-[10px] font-black uppercase tracking-[0.4em] drop-shadow-md">
+          Prince Shop Core Series / Now Live / USE: <span className="text-white underline decoration-2 underline-offset-4">PRINCE20</span>
         </p>
       </div>
 
