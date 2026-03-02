@@ -1,40 +1,46 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ShoppingBag, Heart, Search, Menu, X, Zap } from "lucide-react";
+import { ShoppingBag, Heart, Search, Menu, X, Zap, User } from "lucide-react";
+
+declare global {
+  interface Window {
+    ShopifyGlobal: {
+      routes: {
+        root: string;
+        all_products: string;
+        cart: string;
+        account: string;
+        account_login: string;
+        search: string;
+      };
+      customer: {
+        accounts_enabled: boolean;
+        is_logged_in: boolean;
+        url: string;
+      };
+    };
+  }
+}
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [navLinks, setNavLinks] = useState<any[]>([
-    { name: "Shop All", href: "/collections/all" },
-  ]);
-
   const [cartCount, setCartCount] = useState(0);
 
-  useEffect(() => {
-    const fetchNavCollections = async () => {
-      try {
-        const response = await fetch('/collections.json');
-        if (response.ok) {
-          const data = await response.json();
-          const collections = data.collections
-            .filter((c: any) =>
-              !['beauty', 'nails', 'hair', 'jewelry'].some(term => c.title.toLowerCase().includes(term))
-            )
-            .slice(0, 4).map((c: any) => ({
-              name: c.title,
-              href: `/collections/${c.handle}`
-            }));
-          setNavLinks([
-            ...collections,
-            { name: "Series / 001", href: "/collections/new-arrivals" },
-            { name: "Sale", href: "/collections/sale" },
-          ]);
-        }
-      } catch (error) {
-        console.error('Error fetching nav collections:', error);
-      }
-    };
+  const routes = window.ShopifyGlobal?.routes || {
+    root: "/",
+    all_products: "/collections/all",
+    cart: "/cart",
+    account: "/account",
+    account_login: "/account/login",
+    search: "/search"
+  };
 
+  const navLinks = [
+    { name: "Home", href: routes.root },
+    { name: "Fashion", href: routes.all_products },
+  ];
+
+  useEffect(() => {
     const fetchCart = async () => {
       try {
         const response = await fetch('/cart.js');
@@ -47,19 +53,11 @@ const Header = () => {
       }
     };
 
-    fetchNavCollections();
     fetchCart();
   }, []);
 
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-2xl border-b border-border">
-      {/* Dynamic Top Banner - Royal Message */}
-      <div className="bg-gradient-to-r from-primary via-accent to-primary text-white py-3 px-4 shadow-sm">
-        <p className="text-center text-[10px] font-black uppercase tracking-[0.4em] drop-shadow-md">
-          👑 THE ROYAL DROP IS HERE / SECURE YOUR CROWN
-        </p>
-      </div>
-
       {/* Main Header */}
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between h-20">
@@ -96,17 +94,32 @@ const Header = () => {
 
           {/* Actions - Subtle & Sharp */}
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" className="hidden sm:flex hover:bg-secondary">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="hidden sm:flex hover:bg-secondary"
+              onClick={() => window.location.href = routes.search}
+            >
               <Search className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon" className="hidden sm:flex hover:bg-secondary relative">
-              <Heart className="h-5 w-5" />
-            </Button>
+
+            {/* Account Icon Logic */}
+            {window.ShopifyGlobal?.customer?.accounts_enabled && (
+              <Button
+                variant="ghost"
+                size="icon"
+                className="hidden sm:flex hover:bg-secondary"
+                onClick={() => window.location.href = window.ShopifyGlobal.customer.url}
+              >
+                <User className="h-5 w-5" />
+              </Button>
+            )}
+
             <Button
               variant="default"
               size="icon"
               className="relative rounded-none h-12 w-12 bg-primary hover:bg-black transition-all"
-              onClick={() => window.location.href = '/cart'}
+              onClick={() => window.location.href = routes.cart}
             >
               <ShoppingBag className="h-5 w-5 text-background" />
               {cartCount > 0 && (

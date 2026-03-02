@@ -32,7 +32,25 @@
 
     {{ content_for_header }}
 
-    <link rel="stylesheet" href="{{ 'index-CKOGwidw.css' | asset_url }}" />
+    <link rel="stylesheet" href="{{ 'index-RweFLNxc.css' | asset_url }}" />
+
+    <script>
+      window.ShopifyGlobal = {
+        routes: {
+          root: "{{ routes.root_url }}",
+          all_products: "{{ routes.all_products_collection_url }}",
+          cart: "{{ routes.cart_url }}",
+          account: "{{ routes.account_url }}",
+          account_login: "{{ routes.account_login_url }}",
+          search: "{{ routes.search_url }}"
+        },
+        customer: {
+          accounts_enabled: {{ shop.customer_accounts_enabled | json }},
+          is_logged_in: {{ customer | json ? true : false }},
+          url: "{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}"
+        }
+      };
+    </script>
 
     {% render 'custom-styles' %}
   </head>
@@ -48,7 +66,7 @@
       {{ content_for_layout }}
     </main>
 
-    <script type="module" src="{{ 'index-GZpkGB4V.js' | asset_url }}"></script>
+    <script type="module" src="{{ 'index-DYPUtaEF.js' | asset_url }}"></script>
 
     {% if request.design_mode %}
       <script src="{{ 'theme-editor.js' | asset_url }}" defer></script>
