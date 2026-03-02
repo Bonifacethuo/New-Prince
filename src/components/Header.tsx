@@ -53,10 +53,10 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-2xl border-b border-border">
-      {/* Dynamic Top Banner - Colorful Gradient */}
+      {/* Dynamic Top Banner - Royal Message */}
       <div className="bg-gradient-to-r from-primary via-accent to-primary text-white py-3 px-4 shadow-sm">
         <p className="text-center text-[10px] font-black uppercase tracking-[0.4em] drop-shadow-md">
-          Prince Shop Core Series / Now Live / USE: <span className="text-white underline decoration-2 underline-offset-4">PRINCE20</span>
+          👑 THE ROYAL DROP IS HERE / SECURE YOUR CROWN
         </p>
       </div>
 
@@ -117,26 +117,28 @@ const Header = () => {
             </Button>
           </div>
         </div>
-      </div>
+      </div >
 
       {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <nav className="lg:hidden bg-background border-t border-border animate-fade-in-up">
-          <div className="container mx-auto px-6 py-12 flex flex-col gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-2xl font-black uppercase tracking-tighter text-foreground/80 hover:text-accent transition-all animate-fade-in"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-        </nav>
-      )}
-    </header>
+      {
+        isMenuOpen && (
+          <nav className="lg:hidden bg-background border-t border-border animate-fade-in-up">
+            <div className="container mx-auto px-6 py-12 flex flex-col gap-8">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="text-2xl font-black uppercase tracking-tighter text-foreground/80 hover:text-accent transition-all animate-fade-in"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
+          </nav>
+        )
+      }
+    </header >
   );
 };
 

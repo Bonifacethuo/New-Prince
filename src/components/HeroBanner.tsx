@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import legendModeShirt from "@/assets/products/legend-mode-shirt.png";
+import heroBg from "@/assets/hero-banner.jpg";
 
 // Use a high-quality local placeholder for local dev
-const LOCAL_PLACEHOLDER = "/placeholder.svg";
+const LOCAL_PLACEHOLDER = heroBg;
 
 const HeroBanner = () => {
   // Pull settings from Shopify if available, otherwise use defaults
@@ -25,15 +26,15 @@ const HeroBanner = () => {
     <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-background">
       {/* Dynamic Background Image & Color Layer */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-accent/10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-background/90 to-background/50 z-10" />
         <img
           src={heroImage}
           alt={settings.title}
-          className="w-full h-full object-cover object-center opacity-30 mix-blend-overlay"
+          className="w-full h-full object-cover object-center scale-105"
         />
         {/* Colorful Glows */}
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary/20 blur-[150px] rounded-full animate-pulse" />
-        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-accent/20 blur-[150px] rounded-full animate-pulse" />
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary/30 blur-[150px] rounded-full animate-pulse z-20" />
+        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-accent/30 blur-[150px] rounded-full animate-pulse z-20" />
       </div>
 
       {/* Content Container */}
@@ -41,7 +42,7 @@ const HeroBanner = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 animate-fade-in-up">
           <div className="lg:w-[55%] space-y-10 z-20">
             {/* Elevated Typography */}
-            <h1 className="font-serif text-6xl md:text-8xl lg:text-[7rem] font-black tracking-tighter text-foreground leading-[0.8] uppercase drop-shadow-sm">
+            <h1 className="font-serif text-3xl md:text-5xl lg:text-5xl font-black tracking-tighter text-foreground leading-[1] uppercase drop-shadow-md">
               {settings.title}
             </h1>
 

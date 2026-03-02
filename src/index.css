@@ -18,31 +18,31 @@
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
 
-    /* Royal Deep Purple Primary */
-    --primary: 262 83% 58%;
+    /* Royal Deep Purple Primary - Ultimate Contrast */
+    --primary: 262 83% 35%;
     --primary-foreground: 0 0% 100%;
 
-    /* Soft Lavender Secondary */
-    --secondary: 262 50% 95%;
-    --secondary-foreground: 262 83% 20%;
+    /* Luxury Silk Secondary */
+    --secondary: 262 30% 98%;
+    --secondary-foreground: 262 83% 15%;
 
     /* Muted - Soft Tinted Slate */
-    --muted: 262 20% 96%;
-    --muted-foreground: 262 20% 45%;
+    --muted: 262 15% 96%;
+    --muted-foreground: 262 20% 40%;
 
-    /* Royal Gold Accent */
-    --accent: 43 70% 55%;
+    /* Brighter Royal Gold Accent - High Visibility */
+    --accent: 45 100% 50%;
     /* Luxury Gold */
-    --accent-foreground: 0 0% 100%;
+    --accent-foreground: 262 83% 10%;
 
     /* Destructive */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
     /* Borders & Input */
-    --border: 262 30% 90%;
-    --input: 262 30% 90%;
-    --ring: 262 83% 58%;
+    --border: 262 20% 85%;
+    --input: 262 20% 85%;
+    --ring: 262 83% 35%;
 
     --radius: 0.5rem;
 
