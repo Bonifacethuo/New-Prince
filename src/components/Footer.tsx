@@ -55,7 +55,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-primary text-background border-t border-border">
+    <footer className="bg-background text-foreground border-t border-border">
       {/* Main Footer */}
       <div className="container mx-auto px-4 py-20 md:py-32">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 lg:gap-24">
@@ -94,7 +94,7 @@ const Footer = () => {
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-12">
             {/* Quick Links */}
             <div>
-              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] mb-8 text-white">Series</h4>
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] mb-8 text-foreground">Series</h4>
               <ul className="space-y-4">
                 {shopLinks.map((link) => (
                   <li key={link.name}>
@@ -111,7 +111,7 @@ const Footer = () => {
 
             {/* Customer Service */}
             <div>
-              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] mb-8 text-white">Support</h4>
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] mb-8 text-foreground">Support</h4>
               <ul className="space-y-4">
                 {customerService.map((link) => (
                   <li key={link.name}>
@@ -128,7 +128,7 @@ const Footer = () => {
 
             {/* About */}
             <div>
-              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] mb-8 text-white">Info</h4>
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] mb-8 text-foreground">Info</h4>
               <ul className="space-y-4">
                 {about.map((link) => (
                   <li key={link.name}>

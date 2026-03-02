@@ -26,15 +26,15 @@ const HeroBanner = () => {
     <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-background">
       {/* Dynamic Background Image & Color Layer */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-background/90 to-background/50 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-background/10 via-background/60 to-background z-10" />
         <img
           src={heroImage}
           alt={settings.title}
           className="w-full h-full object-cover object-center scale-105"
         />
-        {/* Colorful Glows */}
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary/30 blur-[150px] rounded-full animate-pulse z-20" />
-        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-accent/30 blur-[150px] rounded-full animate-pulse z-20" />
+        {/* Subtle Neutral Glows */}
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-accent/10 blur-[150px] rounded-full animate-pulse z-20" />
+        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-accent/10 blur-[150px] rounded-full animate-pulse z-20" />
       </div>
 
       {/* Content Container */}
@@ -55,7 +55,7 @@ const HeroBanner = () => {
               <Button
                 variant="default"
                 size="xl"
-                className="rounded-full px-16 group h-20 text-xl bg-primary text-white hover:bg-accent hover:scale-105 transition-all duration-500 shadow-2xl shadow-primary/20"
+                className="rounded-full px-16 group h-20 text-xl bg-black text-white hover:bg-accent hover:text-black hover:scale-105 transition-all duration-500 shadow-2xl shadow-black/20"
                 onClick={() => window.location.href = settings.buttonLink || '/collections/all'}
               >
                 {settings.buttonText}
@@ -66,8 +66,8 @@ const HeroBanner = () => {
 
           {/* Featured Image - Enhanced Visibility */}
           <div className="relative group w-full lg:w-[45%] flex justify-center lg:justify-end z-10">
-            <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-accent/30 blur-[140px] rounded-full scale-110 group-hover:scale-125 transition-transform duration-1000 animate-pulse" />
-            <div className="relative bg-white/5 backdrop-blur-3xl rounded-[3rem] p-4 lg:p-8 border border-white/20 shadow-2xl overflow-hidden group-hover:border-accent/50 transition-colors duration-700">
+            <div className="absolute inset-0 bg-gradient-to-tr from-accent/20 to-transparent blur-[140px] rounded-full scale-110 group-hover:scale-125 transition-transform duration-1000 animate-pulse" />
+            <div className="relative bg-white/40 backdrop-blur-3xl rounded-[3rem] p-4 lg:p-8 border border-black/5 shadow-2xl overflow-hidden group-hover:border-accent/50 transition-colors duration-700">
               <img
                 src={mainFeaturedImage}
                 alt={settings.featuredAlt || "Legend Mode"}

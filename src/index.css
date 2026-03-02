@@ -18,31 +18,31 @@
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
 
-    /* Royal Deep Purple Primary - Ultimate Contrast */
-    --primary: 262 83% 35%;
+    /* High-Contrast Black Primary */
+    --primary: 240 10% 2%;
     --primary-foreground: 0 0% 100%;
 
-    /* Luxury Silk Secondary */
-    --secondary: 262 30% 98%;
-    --secondary-foreground: 262 83% 15%;
+    /* Pure Neutral Secondary */
+    --secondary: 0 0% 98%;
+    --secondary-foreground: 240 10% 3.9%;
 
-    /* Muted - Soft Tinted Slate */
-    --muted: 262 15% 96%;
-    --muted-foreground: 262 20% 40%;
+    /* Muted Slate */
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
 
-    /* Brighter Royal Gold Accent - High Visibility */
+    /* Brilliant Royal Gold Accent */
     --accent: 45 100% 50%;
     /* Luxury Gold */
-    --accent-foreground: 262 83% 10%;
+    --accent-foreground: 240 10% 3.9%;
 
     /* Destructive */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
     /* Borders & Input */
-    --border: 262 20% 85%;
-    --input: 262 20% 85%;
-    --ring: 262 83% 35%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 2%;
 
     --radius: 0.5rem;
 
@@ -66,24 +66,24 @@
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 262 83% 70%;
-    --primary-foreground: 262 83% 10%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 10% 3.9%;
 
-    --secondary: 262 30% 15%;
+    --secondary: 240 10% 12%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 262 30% 15%;
-    --muted-foreground: 262 20% 65%;
+    --muted: 240 10% 12%;
+    --muted-foreground: 240 5% 65%;
 
-    --accent: 43 70% 55%;
+    --accent: 45 100% 50%;
     --accent-foreground: 0 0% 10%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 262 30% 20%;
-    --input: 262 30% 20%;
-    --ring: 262 83% 70%;
+    --border: 240 10% 15%;
+    --input: 240 10% 15%;
+    --ring: 0 0% 98%;
   }
 }
 
@@ -149,16 +149,8 @@ h6 {
     @apply bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-400 bg-clip-text text-transparent;
   }
 
-  .bg-gradient-royal {
-    background: linear-gradient(135deg, hsl(var(--royal-blue)), hsl(270 50% 45%));
-  }
-
-  .bg-gradient-pink {
-    background: linear-gradient(135deg, hsl(var(--soft-pink)), hsl(var(--lavender)));
-  }
-
   .bg-gradient-gold {
-    background: linear-gradient(135deg, hsl(43 90% 55%), hsl(35 90% 50%));
+    background: linear-gradient(135deg, hsl(45 100% 50%), hsl(35 90% 50%));
   }
 
   .sparkle {
