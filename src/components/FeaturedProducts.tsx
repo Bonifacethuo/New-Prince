@@ -1,50 +1,11 @@
 import { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 
-// Import special edition assets
-import goldenLegacyImg from "@/assets/products/golden-legacy.png";
-import legendModeImg from "@/assets/products/legend-mode.png";
-import loveBoldlyImg from "@/assets/products/love-boldly.png";
+
 
 const FeaturedProducts = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-
-  // Pull Shopify asset URLs for special drops if available
-  const shopifyAssets = (window as any).ShopifySettings?.products || {};
-
-  // Special Edition Drops
-  const specialDrops = [
-    {
-      id: 10001,
-      name: "Golden Legacy Sweatshirt",
-      price: 125.00,
-      originalPrice: 150.00,
-      image: shopifyAssets.goldenLegacy || goldenLegacyImg,
-      category: "Collector's Series",
-      rating: 5.0,
-      isSale: true,
-      isNew: true
-    },
-    {
-      id: 10002,
-      name: "Legend Mode T-Shirt",
-      price: 45.00,
-      image: shopifyAssets.legendMode || legendModeImg,
-      category: "Essentials",
-      rating: 5.0,
-      isNew: true
-    },
-    {
-      id: 10003,
-      name: "Love Boldly Long-Sleeve",
-      price: 55.00,
-      image: shopifyAssets.loveBoldly || loveBoldlyImg,
-      category: "Valentines Edit",
-      rating: 5.0,
-      isNew: true
-    }
-  ];
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -73,11 +34,10 @@ const FeaturedProducts = () => {
             )
           );
 
-        // Prepend special drops and fill with others
-        setProducts([...specialDrops, ...mappedProducts].slice(0, 8));
+        setProducts(mappedProducts.slice(0, 8));
       } catch (error) {
         console.error('Error fetching real products:', error);
-        setProducts(specialDrops);
+        setProducts([]);
       } finally {
         setLoading(false);
       }

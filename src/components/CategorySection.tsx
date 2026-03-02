@@ -1,17 +1,9 @@
 import { useState, useEffect } from "react";
 import { ArrowRight, ShoppingBag } from "lucide-react";
 
-// Import special edition assets
-import goldenLegacyImg from "@/assets/products/golden-legacy.png";
-import legendModeImg from "@/assets/products/legend-mode.png";
-import loveBoldlyImg from "@/assets/products/love-boldly.png";
-
 const CategorySection = () => {
   const [categories, setCategories] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-
-  // Pull Shopify asset URLs for special drops if available
-  const shopifyAssets = (window as any).ShopifySettings?.products || {};
 
   useEffect(() => {
     const fetchCollections = async () => {
@@ -21,13 +13,11 @@ const CategorySection = () => {
         const data = await response.json();
 
         const mappedCategories = data.collections
-          .map((c: any, index: number) => ({
+          .map((c: any) => ({
             id: c.id,
             name: c.title,
             description: c.body_html?.replace(/<[^>]*>?/gm, '').slice(0, 80) || `Premium ${c.title} collection`,
-            // Lead with our special visuals
-            image: index === 0 ? (shopifyAssets.goldenLegacy || goldenLegacyImg) :
-              (index === 1 ? (shopifyAssets.legendMode || legendModeImg) : (c.image?.src || "/placeholder.svg")),
+            image: c.image?.src || "/placeholder.svg",
             count: c.products_count || 0,
             handle: c.handle
           }))
@@ -40,12 +30,7 @@ const CategorySection = () => {
         setCategories(mappedCategories);
       } catch (error) {
         console.error('Error fetching real collections:', error);
-        // Fallback demo categories
-        setCategories([
-          { id: 1, name: "Series / 001", handle: "new-arrivals", count: 12, image: shopifyAssets.goldenLegacy || goldenLegacyImg },
-          { id: 2, name: "Essentials", handle: "essentials", count: 24, image: shopifyAssets.legendMode || legendModeImg },
-          { id: 3, name: "Valentines Edit", handle: "valentines", count: 8, image: shopifyAssets.loveBoldly || loveBoldlyImg },
-        ]);
+        setCategories([]);
       } finally {
         setLoading(false);
       }
