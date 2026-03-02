@@ -21,35 +21,28 @@ const HeroBanner = () => {
   const heroImage = settings.image?.includes('no-image') || !settings.image ? LOCAL_PLACEHOLDER : settings.image;
   // Fallback to our provided shirt if Shopify image isn't set
   const mainFeaturedImage = settings.featuredImage?.includes('no-image') || !settings.featuredImage ? legendModeShirt : settings.featuredImage;
-
-  const videoUrl = settings.videoUrl;
+  const videoUrl = settings.videoUrl || 'https://cdn.shopify.com/videos/c/o/v/7a9a06cdd00a40e3aca91106b6eb48b4.mp4';
 
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-background">
-      {/* Dynamic Background Media (Video or Image) */}
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-black">
+      {/* Dynamic Background Media (Video) */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-background/20 via-background/40 to-background/80 z-10" />
+        {/* Darker Overlay for better text readability on video */}
+        <div className="absolute inset-0 bg-black/40 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60 z-10" />
 
-        {videoUrl ? (
-          <video
-            src={videoUrl}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover object-center scale-105"
-          />
-        ) : (
-          <img
-            src={heroImage}
-            alt={settings.title}
-            className="w-full h-full object-cover object-center scale-105"
-          />
-        )}
+        <video
+          src={videoUrl}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover object-center scale-100"
+        />
 
-        {/* Subtle Neutral Glows */}
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-accent/10 blur-[150px] rounded-full animate-pulse z-20" />
-        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-accent/10 blur-[150px] rounded-full animate-pulse z-20" />
+        {/* Subtle Luxury Glows */}
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-accent/20 blur-[150px] rounded-full animate-pulse z-20" />
+        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-accent/20 blur-[150px] rounded-full animate-pulse z-20" />
       </div>
 
       {/* Content Container */}
@@ -57,11 +50,11 @@ const HeroBanner = () => {
         <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto animate-fade-in-up">
           <div className="space-y-10 z-20">
             {/* Elevated Typography */}
-            <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground leading-[1] uppercase drop-shadow-lg">
+            <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-white leading-[1] uppercase drop-shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
               {settings.title}
             </h1>
 
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto font-light leading-relaxed border-t-2 border-accent pt-8">
+            <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto font-light leading-relaxed border-t-2 border-accent pt-8 drop-shadow-lg">
               {settings.subtitle}
             </p>
 
