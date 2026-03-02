@@ -22,16 +22,31 @@ const HeroBanner = () => {
   // Fallback to our provided shirt if Shopify image isn't set
   const mainFeaturedImage = settings.featuredImage?.includes('no-image') || !settings.featuredImage ? legendModeShirt : settings.featuredImage;
 
+  const videoUrl = settings.videoUrl;
+
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-background">
-      {/* Dynamic Background Image & Color Layer */}
+      {/* Dynamic Background Media (Video or Image) */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-background/10 via-background/60 to-background z-10" />
-        <img
-          src={heroImage}
-          alt={settings.title}
-          className="w-full h-full object-cover object-center scale-105"
-        />
+        <div className="absolute inset-0 bg-gradient-to-br from-background/20 via-background/40 to-background/80 z-10" />
+
+        {videoUrl ? (
+          <video
+            src={videoUrl}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover object-center scale-105"
+          />
+        ) : (
+          <img
+            src={heroImage}
+            alt={settings.title}
+            className="w-full h-full object-cover object-center scale-105"
+          />
+        )}
+
         {/* Subtle Neutral Glows */}
         <div className="absolute -top-24 -left-24 w-96 h-96 bg-accent/10 blur-[150px] rounded-full animate-pulse z-20" />
         <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-accent/10 blur-[150px] rounded-full animate-pulse z-20" />

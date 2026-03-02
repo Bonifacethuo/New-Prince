@@ -22,7 +22,8 @@
       title: "{{ section.settings.hero_title | escape }}",
       subtitle: "{{ section.settings.hero_subtitle | escape }}",
       buttonText: "{{ section.settings.button_text | escape }}",
-      buttonLink: "{{ section.settings.button_link }}"
+      buttonLink: "{{ section.settings.button_link }}",
+      videoUrl: "{{ section.settings.video_url }}"
     },
     products: {
       goldenLegacy: "{{ 'golden-legacy-C4QqB_61.png' | asset_url }}",
@@ -46,6 +47,12 @@
       "type": "image_picker",
       "id": "hero_image",
       "label": "Hero Image"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Background Video URL (MP4 Link)",
+      "info": "Upload an MP4 to Content > Files and paste the link here. Background video will override the hero image."
     },
     {
       "type": "text",
