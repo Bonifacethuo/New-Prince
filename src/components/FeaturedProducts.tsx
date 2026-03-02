@@ -10,6 +10,9 @@ const FeaturedProducts = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // Pull Shopify asset URLs for special drops if available
+  const shopifyAssets = (window as any).ShopifySettings?.products || {};
+
   // Special Edition Drops
   const specialDrops = [
     {
@@ -17,7 +20,7 @@ const FeaturedProducts = () => {
       name: "Golden Legacy Sweatshirt",
       price: 125.00,
       originalPrice: 150.00,
-      image: goldenLegacyImg,
+      image: shopifyAssets.goldenLegacy || goldenLegacyImg,
       category: "Collector's Series",
       rating: 5.0,
       isSale: true,
@@ -27,7 +30,7 @@ const FeaturedProducts = () => {
       id: 10002,
       name: "Legend Mode T-Shirt",
       price: 45.00,
-      image: legendModeImg,
+      image: shopifyAssets.legendMode || legendModeImg,
       category: "Essentials",
       rating: 5.0,
       isNew: true
@@ -36,7 +39,7 @@ const FeaturedProducts = () => {
       id: 10003,
       name: "Love Boldly Long-Sleeve",
       price: 55.00,
-      image: loveBoldlyImg,
+      image: shopifyAssets.loveBoldly || loveBoldlyImg,
       category: "Valentines Edit",
       rating: 5.0,
       isNew: true

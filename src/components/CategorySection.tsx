@@ -10,6 +10,9 @@ const CategorySection = () => {
   const [categories, setCategories] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // Pull Shopify asset URLs for special drops if available
+  const shopifyAssets = (window as any).ShopifySettings?.products || {};
+
   useEffect(() => {
     const fetchCollections = async () => {
       try {
@@ -23,7 +26,8 @@ const CategorySection = () => {
             name: c.title,
             description: c.body_html?.replace(/<[^>]*>?/gm, '').slice(0, 80) || `Premium ${c.title} collection`,
             // Lead with our special visuals
-            image: index === 0 ? goldenLegacyImg : (index === 1 ? legendModeImg : (c.image?.src || "/placeholder.svg")),
+            image: index === 0 ? (shopifyAssets.goldenLegacy || goldenLegacyImg) :
+              (index === 1 ? (shopifyAssets.legendMode || legendModeImg) : (c.image?.src || "/placeholder.svg")),
             count: c.products_count || 0,
             handle: c.handle
           }))
@@ -38,9 +42,9 @@ const CategorySection = () => {
         console.error('Error fetching real collections:', error);
         // Fallback demo categories
         setCategories([
-          { id: 1, name: "Series / 001", handle: "new-arrivals", count: 12, image: goldenLegacyImg },
-          { id: 2, name: "Essentials", handle: "essentials", count: 24, image: legendModeImg },
-          { id: 3, name: "Valentines Edit", handle: "valentines", count: 8, image: loveBoldlyImg },
+          { id: 1, name: "Series / 001", handle: "new-arrivals", count: 12, image: shopifyAssets.goldenLegacy || goldenLegacyImg },
+          { id: 2, name: "Essentials", handle: "essentials", count: 24, image: shopifyAssets.legendMode || legendModeImg },
+          { id: 3, name: "Valentines Edit", handle: "valentines", count: 8, image: shopifyAssets.loveBoldly || loveBoldlyImg },
         ]);
       } finally {
         setLoading(false);

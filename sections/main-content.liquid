@@ -16,13 +16,18 @@
 <script>
   window.ShopifySettings = {
     hero: {
-      image: "{{ section.settings.hero_image | image_url: width: 2000 }}",
-      featuredImage: "{{ section.settings.featured_image | image_url: width: 1500 }}",
-      featuredAlt: "{{ section.settings.featured_image.alt | escape }}",
+      image: "{% if section.settings.hero_image %}{{ section.settings.hero_image | image_url: width: 2000 }}{% else %}{{ 'hero-banner-CPi4Gsnp.jpg' | asset_url }}{% endif %}",
+      featuredImage: "{% if section.settings.featured_image %}{{ section.settings.featured_image | image_url: width: 1500 }}{% else %}{{ 'legend-mode-shirt-CsfhAvDW.png' | asset_url }}{% endif %}",
+      featuredAlt: "{{ section.settings.featured_image.alt | default: 'Prince Shop Featured' | escape }}",
       title: "{{ section.settings.hero_title | escape }}",
       subtitle: "{{ section.settings.hero_subtitle | escape }}",
       buttonText: "{{ section.settings.button_text | escape }}",
       buttonLink: "{{ section.settings.button_link }}"
+    },
+    products: {
+      goldenLegacy: "{{ 'golden-legacy-C4QqB_61.png' | asset_url }}",
+      legendMode: "{{ 'legend-mode-CTylnSS4.png' | asset_url }}",
+      loveBoldly: "{{ 'love-boldly-EhP8g-VA.png' | asset_url }}"
     }
   };
 </script>
