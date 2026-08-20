@@ -46,7 +46,7 @@
         },
         customer: {
           accounts_enabled: {{ shop.customer_accounts_enabled | json }},
-          is_logged_in: {{ customer | json ? true : false }},
+          is_logged_in: {{ customer | json: false }},
           url: "{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}"
         }
       };
@@ -73,3 +73,13 @@
     {% endif %}
   </body>
 </html>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{{ customer | json ? true : false }}"
+  to: "{{ customer | json: false }}"
+  position: 2080..2108
+{% endcomment %}
